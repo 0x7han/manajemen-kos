@@ -14,8 +14,8 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    String dbPath = await getDatabasesPath();
-    String path = join(dbPath, 'rental_kamar.db');
+
+    String path = join('/storage/emulated/0/Download/', 'rental_kamar.db');
     return await openDatabase(
       path,
       version: 1,

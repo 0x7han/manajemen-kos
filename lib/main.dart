@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:manajemen_kos/core/helpers/database_helper.dart';
 import 'package:manajemen_kos/screens/login_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-void main() async {
+Future<void> main() async {
   // Memastikan semua fitur siap sebelum eksekusi fungsi-fungsi dibawah
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Mendapatkan akses perizinan storage android
+  var permission = await Permission.manageExternalStorage.status;
+
+  if (!permission.isGranted) {
+    await Permission.manageExternalStorage.request();
+  }
 
   // Inisialisasi database
   final dbHelper = DatabaseHelper.instance;
